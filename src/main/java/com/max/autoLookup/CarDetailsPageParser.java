@@ -2,6 +2,7 @@ package com.max.autoLookup;
 
 import com.max.autoLookup.model.CarDetailsModel;
 import com.max.autoLookup.model.SearchResults;
+import com.max.autoLookup.repository.CarDetailsRepository;
 import com.max.autoLookup.repository.SearchResultsRepository;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -21,11 +22,12 @@ import static com.max.autoLookup.Constants.BASE_URL;
 @RequiredArgsConstructor
 public class CarDetailsPageParser {
 
-    private final SearchResultsRepository repo;
+    private final SearchResultsRepository searchResultsRepository;
+    private final CarDetailsRepository carDetailsRepository;
 
     public int parsePage(){
 
-        List<SearchResults> toParse = repo.findAll().stream()
+        List<SearchResults> toParse = searchResultsRepository.findAll().stream()
                 .filter(record -> "NEW".equals(record.getStatus()))
                 .toList();
 
@@ -54,6 +56,7 @@ public class CarDetailsPageParser {
                 .map(Element::text)
                 .filter(StringUtils::hasText)
                 .findFirst()
+                .map(text -> text.substring(0,600))
                 .ifPresent(carDetails::setDescription);
 
         targetPage.getElementsByClass("regularPriceColor").stream()
@@ -77,7 +80,9 @@ public class CarDetailsPageParser {
         carDetails.setId(String.valueOf(carDetails.hashCode()));
 
 
-        System.out.println("Whaaaat?");
+        carDetailsRepository.saveAndFlush(carDetails);
+        ad.setStatus("PROCESSED");
+        searchResultsRepository.save(ad);
     }
     private void parseGridBulk(Elements grid, List<String> dataParams){
         dataParams.forEach(param -> {

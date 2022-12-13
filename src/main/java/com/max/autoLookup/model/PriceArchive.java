@@ -12,28 +12,30 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Getter
-@Setter
 @Entity
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "SEARCH_RESULTS")
-public class SearchResults {
+@AllArgsConstructor
+@Getter
+@Setter
+@Table(name = "PRICE_HISTORICAL_DATA")
+public class PriceArchive {
+
     @Id
     @Column(updatable = false)
     @EqualsAndHashCode.Exclude
-    Long id;
-    Long adId;
-    String name;
-    String city;
-    Long price;
-    String link;
-    @EqualsAndHashCode.Exclude
-    String Status;
-    @EqualsAndHashCode.Exclude
-    String createTime;
-    @EqualsAndHashCode.Exclude
-    String lastUpdateTime;
+    private Long id;
 
+    private Long adUUID;
+
+
+    @Column(name = "PRICE")
+    private String price;
+
+    @Column(name = "CREATION_TIME")
+    @EqualsAndHashCode.Exclude
+    private String createdTime;
+    @Column(name = "LAST_UPDATED")
+    @EqualsAndHashCode.Exclude
+    private String lastCheckedTime;
 }

@@ -13,5 +13,5 @@ public interface ICrawlerService {
     BasicHttpResponse processRecords();
 
     @GetMapping("/parseNewAds")
-    BasicHttpResponse   parseNewAds();
+    BasicHttpResponse   parseNewAds(String link);
 }

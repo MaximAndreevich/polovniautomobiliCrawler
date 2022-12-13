@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.max.autoLookup.Constants.BASE_URL;
@@ -77,7 +78,7 @@ public class CarDetailsPageParser {
         carDetails.setAdNumber(parseGrid(grid,"Broj oglasa:"));
         carDetails.setRegistration(parseGrid(grid,"Registrovan do"));
 
-        carDetails.setId(String.valueOf(carDetails.hashCode()));
+        carDetails.setId(Math.abs(UUID.randomUUID().getMostSignificantBits()));
 
 
         carDetailsRepository.saveAndFlush(carDetails);

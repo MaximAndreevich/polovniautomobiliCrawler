@@ -22,8 +22,8 @@ public class CrawlerServiceImpl implements ICrawlerService{
     private final CarDetailsPageParser carDetailsPageParser;
 
     @Override
-     public BasicHttpResponse parseNewAds(){
-        int code = searchResultsPageParser.exec();
+     public BasicHttpResponse parseNewAds(String link){
+        int code = searchResultsPageParser.exec(link);
         return new BasicHttpResponse(new BasicStatusLine(HTTP_1_1, code, httpCodeToPhrase(code)));
     }
 

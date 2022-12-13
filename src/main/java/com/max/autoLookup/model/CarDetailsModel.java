@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "CAR_DETAILS")
 public class CarDetailsModel {
     @Id
-    String id;
+    Long id;
     String adNumber;
     String name;
     String brand;

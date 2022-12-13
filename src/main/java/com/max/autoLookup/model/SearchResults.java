@@ -24,12 +24,18 @@ public class SearchResults {
     @Column(updatable = false)
     @EqualsAndHashCode.Exclude
     Long id;
+    @Column(name = "AD_ID")
     Long adId;
+    @Column(name = "NAME")
     String name;
+    @Column(name = "CITY")
     String city;
+    @Column(name = "PRICE")
     Long price;
+    @Column(name = "LINK")
     String link;
     @EqualsAndHashCode.Exclude
+    @Column(name = "STATUS")
     String Status;
     @EqualsAndHashCode.Exclude
     String createTime;

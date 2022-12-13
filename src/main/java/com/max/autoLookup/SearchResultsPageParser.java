@@ -4,6 +4,7 @@ import com.max.autoLookup.model.PriceArchive;
 import com.max.autoLookup.model.SearchResults;
 import com.max.autoLookup.repository.SearchResultsRepository;
 import com.max.autoLookup.service.SearchResultsService;
+import com.max.autoLookup.util.SearchStatusCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -78,7 +79,7 @@ public class SearchResultsPageParser {
                             .city(adCity)
                             .createTime(createTS())
                             .lastUpdateTime(createTS())
-                            .Status("NEW").build();
+                            .Status(SearchStatusCode.NEW).build();
                     PriceArchive currentPrice = PriceArchive.builder()
                             .id(adIdentifier)
                             .adUUID(adIdentifier)

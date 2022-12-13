@@ -2,7 +2,6 @@ package com.max.autoLookup;
 
 import com.max.autoLookup.model.PriceArchive;
 import com.max.autoLookup.model.SearchResults;
-import com.max.autoLookup.repository.SearchResultsRepository;
 import com.max.autoLookup.service.SearchResultsService;
 import com.max.autoLookup.util.SearchStatusCode;
 import lombok.RequiredArgsConstructor;
@@ -11,17 +10,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -38,6 +32,7 @@ public class SearchResultsPageParser {
     private final SearchResultsService searchResultsService;
 
 
+    //TODO: add links constructor. Create extendable collections of year, engine type, models and brands
     public static final String HARDCODED_SEARCH_CRITERIA = BASE_URL + "/auto-oglasi/pretraga?brand=alfa-romeo&model%5B%5D=brera&price_to=&year_from=&year_to=&showOldNew=all&submit_1=&without_price=1";
     public static final String HARDCODED_SEARCH_CRITERIA2 = BASE_URL + "/auto-oglasi/pretraga?brand=mazda&model%5B%5D=mx-5&price_to=&year_from=&year_to=&showOldNew=all&submit_1=&without_price=1";
 
@@ -45,10 +40,10 @@ public class SearchResultsPageParser {
     public int exec(String link) {
         Document targetPage;
         org.jsoup.Connection connection = Jsoup.newSession();
-        if(link.equals("2")) {
+        if (link.equals("2")) {
             connection = Jsoup.connect(HARDCODED_SEARCH_CRITERIA2);
         }
-        if(link.equals("1")){
+        if (link.equals("1")) {
             connection = Jsoup.connect(HARDCODED_SEARCH_CRITERIA);
         }
         try {
@@ -97,8 +92,7 @@ public class SearchResultsPageParser {
             return 500;
         }
 
-        //TODO: table with search results, flag to skip
-        //TODO: mode to process  prepared records
+        //TODO: mode to process only stashed pages for debug without calling a real website
 
     }
 
@@ -128,7 +122,7 @@ public class SearchResultsPageParser {
         return result;
     }
 
-    private String createTS(){
+    private String createTS() {
         return new Timestamp(System.currentTimeMillis()).toString();
     }
 

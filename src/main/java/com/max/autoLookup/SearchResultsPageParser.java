@@ -30,11 +30,6 @@ public class SearchResultsPageParser {
     private final SearchResultsService searchResultsService;
 
 
-    //TODO: add links constructor. Create extendable collections of year, engine type, models and brands
-    public static final String HARDCODED_SEARCH_CRITERIA = BASE_URL + "/auto-oglasi/pretraga?brand=alfa-romeo&model%5B%5D=brera&price_to=&year_from=&year_to=&showOldNew=all&submit_1=&without_price=1";
-    public static final String HARDCODED_SEARCH_CRITERIA2 = BASE_URL + "/auto-oglasi/pretraga?brand=mazda&model%5B%5D=mx-5&price_to=&year_from=&year_to=&showOldNew=all&submit_1=&without_price=1";
-
-
     public int exec(Document targetPage) {
 
         List<SearchResults> linksToParse = new ArrayList<>();

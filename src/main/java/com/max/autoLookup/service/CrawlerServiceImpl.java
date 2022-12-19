@@ -1,6 +1,7 @@
 package com.max.autoLookup.service;
 
 import com.max.autoLookup.CarDetailsPageParser;
+import com.max.autoLookup.SearchPageParser;
 import com.max.autoLookup.SearchResultsPageParser;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.message.BasicHttpResponse;
@@ -18,12 +19,12 @@ import static org.apache.http.HttpVersion.HTTP_1_1;
 @RequiredArgsConstructor
 public class CrawlerServiceImpl implements ICrawlerService{
 
-    private final SearchResultsPageParser searchResultsPageParser;
+    private final SearchPageParser searchPageParser;
     private final CarDetailsPageParser carDetailsPageParser;
 
     @Override
      public BasicHttpResponse parseNewAds(String link){
-        int code = searchResultsPageParser.exec(link);
+        int code = searchPageParser.processSearchPage(link);
         return new BasicHttpResponse(new BasicStatusLine(HTTP_1_1, code, httpCodeToPhrase(code)));
     }
 

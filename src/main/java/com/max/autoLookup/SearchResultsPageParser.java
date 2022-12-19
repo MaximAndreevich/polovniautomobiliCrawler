@@ -6,13 +6,11 @@ import com.max.autoLookup.service.SearchResultsService;
 import com.max.autoLookup.util.SearchStatusCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -32,27 +30,7 @@ public class SearchResultsPageParser {
     private final SearchResultsService searchResultsService;
 
 
-    //TODO: add links constructor. Create extendable collections of year, engine type, models and brands
-    public static final String HARDCODED_SEARCH_CRITERIA = BASE_URL + "/auto-oglasi/pretraga?brand=alfa-romeo&model%5B%5D=brera&price_to=&year_from=&year_to=&showOldNew=all&submit_1=&without_price=1";
-    public static final String HARDCODED_SEARCH_CRITERIA2 = BASE_URL + "/auto-oglasi/pretraga?brand=mazda&model%5B%5D=mx-5&price_to=&year_from=&year_to=&showOldNew=all&submit_1=&without_price=1";
-
-
-    public int exec(String link) {
-        Document targetPage;
-        org.jsoup.Connection connection = Jsoup.newSession();
-        if (link.equals("2")) {
-            connection = Jsoup.connect(HARDCODED_SEARCH_CRITERIA2);
-        }
-        if (link.equals("1")) {
-            connection = Jsoup.connect(HARDCODED_SEARCH_CRITERIA);
-        }
-        try {
-            targetPage = connection.get();
-        } catch (IOException e) {
-            return 500;
-        }
-        //TODO: handle 500 with more information
-        //TODO: save search result Elements for debug from file
+    public int exec(Document targetPage) {
 
         List<SearchResults> linksToParse = new ArrayList<>();
         List<PriceArchive> priceArchive = new ArrayList<>();
@@ -91,8 +69,6 @@ public class SearchResultsPageParser {
         } catch (SQLException e) {
             return 500;
         }
-
-        //TODO: mode to process only stashed pages for debug without calling a real website
 
     }
 

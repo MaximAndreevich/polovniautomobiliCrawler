@@ -3,7 +3,6 @@ package com.max.autoLookup;
 import com.max.autoLookup.exception.PageParsingException;
 import com.max.autoLookup.model.CarListing;
 import com.max.autoLookup.model.PriceHistory;
-import com.max.autoLookup.repository.PriceHistoryRepository;
 import com.max.autoLookup.service.SearchResultsService;
 import com.max.autoLookup.util.CommonUtils;
 import com.max.autoLookup.util.SearchStatusCode;
@@ -13,17 +12,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Slf4j
 @Service

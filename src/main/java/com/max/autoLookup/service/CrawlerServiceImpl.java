@@ -2,7 +2,6 @@ package com.max.autoLookup.service;
 
 import com.max.autoLookup.CarDetailsPageParser;
 import com.max.autoLookup.SearchPageParser;
-import com.max.autoLookup.SearchResultsPageParser;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;

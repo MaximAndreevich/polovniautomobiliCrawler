@@ -25,7 +25,8 @@ public class SearchPageParser {
     private int adsOnOnePage = 25;
     private int localRun = 0;
 
-    //TODO: add links constructor. Create extendable collections of year, engine type, models and brands
+    //TODO: add links constructor.
+    // Create extendable collections of year, engine type, models and brands
 
     public int processSearchPage(String searchPath) {
         Document searchPage = getPage(searchPath);

@@ -11,6 +11,7 @@ As website does not provide historical data I decided to collect it and keep in 
 GET http://localhost:1400/cardb/parseNewAds?link=testPages/audi_search_page.html
 
 //SQL to get ad and matching price from DB
-SELECT a.ad_id, NAME, CITY, b.PRICE, b.LAST_UPDATED FROM SEARCH_RESULTS as a
-JOIN PRICE_HISTORICAL_DATA as b
-on a.ID= b.ADUUID
+SELECT  UNIQUE_NUMBER, TITLE, URL, PRICE, CREATE_DATE, CHANGE_DATE
+FROM CAR_LISTING
+JOIN PRICE_HISTORY
+ON CAR_LISTING.ID = PRICE_HISTORY.CAR_LISTING_ID 
